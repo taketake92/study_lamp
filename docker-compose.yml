@@ -10,10 +10,10 @@ services:
     environment:
       - APP_DEFAULT_LOCALE=ja_JP
       - APP_DEFAULT_TIMEZONE=Asia/Tokyo
-  #     - DATABASE_HOST=php-book-app-db
-  #     - DATABASE_USER=root
-  #     - DATABASE_PASS=secret
-  #     - DATABASE_NAME=qa_app
+      - DATABASE_HOST=php-book-app-db
+      - DATABASE_USER=root
+      - DATABASE_PASS=secret
+      - DATABASE_NAME=qa_app
   #     - DATABASE_TEST_URL=mysql://root:secret@php-book-app-db/test
     command: bash -c "sh docker-init-setup.sh && apache2-foreground"
     ports:
@@ -23,8 +23,8 @@ services:
     build:
       context: .
       dockerfile: ./Docker/mysql/Dockerfile
-    # volumes:
-    #   - ./Docker/mysql/sqls:/docker-entrypoint-initdb.d
+    volumes:
+      - ./Docker/mysql/sqls:/docker-entrypoint-initdb.d
     #   - ./Docker/mysql/data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=secret
